@@ -1,29 +1,57 @@
 # Equilibrium Puzzles
 
-A browser puzzle game about Nash equilibrium, and the game theory underneath it.
+A browser game about Nash equilibrium, and the notebooks that build everything underneath it.
 
-This repository is being built in steps. It starts with solvers written from scratch, moves on to learning algorithms that try to reach equilibrium by playing, and ends in the game itself, where people find equilibria and play against those algorithms. Each step is a worked notebook that explains the theory, implements it, and checks the result.
+**[Play the game →](https://ozgunezgi.github.io/equilibrium-puzzles/)**
 
-## Status
+A Nash equilibrium is an outcome in which no player can do better by changing only their own move. This repository approaches it from three sides: computing equilibria exactly, watching learning algorithms try to reach them by playing, and turning both into a game where people do the same.
 
-- [x] **01 · Computing equilibria:** best responses, dominance, zero-sum games as linear programs, support enumeration
-- [ ] **02 · Learning in games:** fictitious play, regret matching, Q-learning, and what it means for learning to "converge"
-- [ ] **03 · Levels and a puzzle generator:** a level format, an inverse LP for design puzzles, generated puzzles and a difficulty measure
-- [ ] **The game:** find equilibria, set mixed strategies with sliders, redesign payoffs, and play against learning agents, in the browser
+## The game
 
-## 01 · Computing equilibria
+`index.html` is the whole game: one file, no build step, no server. It has two parts.
 
-[`notebooks/01_computing_equilibria.ipynb`](notebooks/01_computing_equilibria.ipynb) covers two-player normal-form games: expected payoffs and best responses, checking a Nash equilibrium, pure equilibria and iterated elimination of dominated strategies, zero-sum games solved as linear programs, support enumeration for all equilibria of a nondegenerate game, and domination by mixed strategies.
+**Puzzles.** Small games from the literature, from the Prisoner's Dilemma and Matching Pennies to penalty kicks and the Battle of the Sexes. Each level has three modes:
 
-Each section works through a familiar game (Prisoner's Dilemma, Matching Pennies, Battle of the Sexes, Rock-Paper-Scissors). Support enumeration is compared with [`nashpy`](https://github.com/drvinceknight/Nashpy) on random games. The main thread follows Shoham & Leyton-Brown, *Multiagent Systems* (2009), and the notebook cites the original papers for each method.
+- *Solve:* select the cells nobody wants to leave, or set the mix of moves that makes the other player indifferent.
+- *Watch learners:* hand the same game to two copies of fictitious play, regret matching or Q-learning and see where they end up.
+- *Play the machine:* play the game yourself against one of those learners.
+
+**Play.** The learning rules become characters.
+
+- *Mystery opponents:* eight opponents play Rock-Paper-Scissors by hidden rules. Beat each one, then name its rule.
+- *Tournament:* every character plays every other one, as in Axelrod's tournaments, in Rock-Paper-Scissors or the Prisoner's Dilemma.
+- *Evolution:* strategies that earn more than the average spread through a population. In the repeated Prisoner's Dilemma this shows when cooperation survives; in Rock-Paper-Scissors the population circles the equilibrium; in Hawks and Doves it settles on a mix.
+
+## The notebooks
+
+| Notebook | What it covers |
+|---|---|
+| [`01_computing_equilibria`](notebooks/01_computing_equilibria.ipynb) | Best responses, dominance and iterated elimination, zero-sum games as linear programs, support enumeration, domination by mixed strategies. Results are checked against [`nashpy`](https://github.com/drvinceknight/Nashpy). |
+| [`02_learning_in_games`](notebooks/02_learning_in_games.ipynb) | Fictitious play, regret matching and Q-learning, measured with NashConv. When the average strategy converges and the current one does not, and Shapley's game, where both fail. |
+| [`03_levels_and_generator`](notebooks/03_levels_and_generator.ipynb) | The level format the game uses, an inverse linear program for the redesign puzzle, a generator for new puzzles, and a difficulty measure based on how long regret matching takes to solve each one. |
+
+The main thread follows Shoham and Leyton-Brown, *Multiagent Systems* (2009). Each notebook cites the original papers for the methods it implements.
+
+## Layout
+
+```
+index.html        the game
+levels/           puzzle files written by notebook 03 (the game also carries a copy)
+notebooks/        01, 02, 03
+requirements.txt
+```
 
 ## Running
+
+Notebooks:
 
 ```
 pip install -r requirements.txt
 jupyter notebook notebooks/
 ```
 
+The game: open `index.html` in a browser, or serve the folder with `python -m http.server` so it reads the files in `levels/`.
+
 ## License
 
-MIT
+MIT. The rock, paper and scissors drawings are my own.
