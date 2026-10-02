@@ -1,0 +1,382 @@
+[
+  {
+    "id": "w2-01",
+    "world": 2,
+    "order": 1,
+    "title": "Matching Pennies, Mixed",
+    "concept": "Mixed equilibrium by symmetry",
+    "story": "The same matching game as before. There is no pure equilibrium, so each player must randomise. How?",
+    "task": "mixed",
+    "players": [
+      "Matcher",
+      "Mismatcher"
+    ],
+    "row_labels": [
+      "Heads",
+      "Tails"
+    ],
+    "col_labels": [
+      "Heads",
+      "Tails"
+    ],
+    "A": [
+      [
+        1.0,
+        -1.0
+      ],
+      [
+        -1.0,
+        1.0
+      ]
+    ],
+    "B": [
+      [
+        -1.0,
+        1.0
+      ],
+      [
+        1.0,
+        -1.0
+      ]
+    ],
+    "hints": [
+      "If your opponent could predict you, she would win. What mix is impossible to exploit?"
+    ],
+    "check": {
+      "type": "nash_conv",
+      "tolerance": 0.06,
+      "require_fully_mixed": false
+    },
+    "solution": {
+      "mixed": [
+        {
+          "x": [
+            0.5,
+            0.5
+          ],
+          "y": [
+            0.5,
+            0.5
+          ]
+        }
+      ]
+    },
+    "known_as": "Matching Pennies",
+    "difficulty": {
+      "size": "2x2",
+      "n_equilibria": 1,
+      "max_support": 2,
+      "max_denominator": 2,
+      "dominance_solvable": false,
+      "learning_rounds": 2290
+    }
+  },
+  {
+    "id": "w2-02",
+    "world": 2,
+    "order": 2,
+    "title": "Asymmetric Zero-Sum Game",
+    "concept": "Indifference principle",
+    "story": "A zero-sum game where one outcome is worth more than the others. The answer is not 50-50.",
+    "task": "mixed",
+    "players": [
+      "Row",
+      "Column"
+    ],
+    "row_labels": [
+      "Up",
+      "Down"
+    ],
+    "col_labels": [
+      "Left",
+      "Right"
+    ],
+    "A": [
+      [
+        2.0,
+        -1.0
+      ],
+      [
+        -1.0,
+        1.0
+      ]
+    ],
+    "B": [
+      [
+        -2.0,
+        1.0
+      ],
+      [
+        1.0,
+        -1.0
+      ]
+    ],
+    "hints": [
+      "Choose your probability p of Up so that the column player earns the same with Left and with Right.",
+      "Write the column player's payoff for Left and for Right as functions of p and set them equal."
+    ],
+    "check": {
+      "type": "nash_conv",
+      "tolerance": 0.12,
+      "require_fully_mixed": false
+    },
+    "solution": {
+      "mixed": [
+        {
+          "x": [
+            0.4,
+            0.6
+          ],
+          "y": [
+            0.4,
+            0.6
+          ]
+        }
+      ]
+    },
+    "difficulty": {
+      "size": "2x2",
+      "n_equilibria": 1,
+      "max_support": 2,
+      "max_denominator": 5,
+      "dominance_solvable": false,
+      "learning_rounds": 610
+    }
+  },
+  {
+    "id": "w2-03",
+    "world": 2,
+    "order": 3,
+    "title": "Penalty Kicks",
+    "concept": "Minimax in the field",
+    "story": "A kicker shoots left or right; the goalkeeper dives left or right. Numbers are the chance of a goal in percent for the kicker, and the chance of a save for the keeper. The kicker is stronger on her left.",
+    "task": "mixed",
+    "players": [
+      "Kicker",
+      "Keeper"
+    ],
+    "row_labels": [
+      "Shoot left",
+      "Shoot right"
+    ],
+    "col_labels": [
+      "Dive left",
+      "Dive right"
+    ],
+    "A": [
+      [
+        50.0,
+        95.0
+      ],
+      [
+        90.0,
+        40.0
+      ]
+    ],
+    "B": [
+      [
+        50.0,
+        5.0
+      ],
+      [
+        10.0,
+        60.0
+      ]
+    ],
+    "hints": [
+      "The keeper must be indifferent between diving left and right. What does that say about the kicker's mix?",
+      "Real kickers shoot to their stronger side a bit more than half the time. Does your answer agree?"
+    ],
+    "check": {
+      "type": "nash_conv",
+      "tolerance": 2.7,
+      "require_fully_mixed": false
+    },
+    "solution": {
+      "mixed": [
+        {
+          "x": [
+            0.526316,
+            0.473684
+          ],
+          "y": [
+            0.578947,
+            0.421053
+          ]
+        }
+      ]
+    },
+    "known_as": "a penalty kick game",
+    "difficulty": {
+      "size": "2x2",
+      "n_equilibria": 1,
+      "max_support": 2,
+      "max_denominator": 19,
+      "dominance_solvable": false,
+      "learning_rounds": 330
+    }
+  },
+  {
+    "id": "w2-04",
+    "world": 2,
+    "order": 4,
+    "title": "Battle of the Sexes",
+    "concept": "Mixed equilibrium beside pure ones",
+    "story": "Two friends want to meet but disagree on where. The two pure equilibria are not accepted here: find the one where both friends randomise.",
+    "task": "mixed",
+    "players": [
+      "Friend A",
+      "Friend B"
+    ],
+    "row_labels": [
+      "Opera",
+      "Football"
+    ],
+    "col_labels": [
+      "Opera",
+      "Football"
+    ],
+    "A": [
+      [
+        2.0,
+        0.0
+      ],
+      [
+        0.0,
+        1.0
+      ]
+    ],
+    "B": [
+      [
+        1.0,
+        0.0
+      ],
+      [
+        0.0,
+        2.0
+      ]
+    ],
+    "hints": [
+      "Friend A's probabilities must make Friend B indifferent, not Friend A herself.",
+      "Compare the payoffs at the answer with those of the pure equilibria. Who gains from mixing?"
+    ],
+    "check": {
+      "type": "nash_conv",
+      "tolerance": 0.06,
+      "require_fully_mixed": true
+    },
+    "solution": {
+      "mixed": [
+        {
+          "x": [
+            0.666667,
+            0.333333
+          ],
+          "y": [
+            0.333333,
+            0.666667
+          ]
+        }
+      ]
+    },
+    "known_as": "the Battle of the Sexes",
+    "difficulty": {
+      "size": "2x2",
+      "n_equilibria": 3,
+      "max_support": 2,
+      "max_denominator": 3,
+      "dominance_solvable": false,
+      "learning_rounds": 150
+    }
+  },
+  {
+    "id": "w2-05",
+    "world": 2,
+    "order": 5,
+    "title": "Rock-Paper-Scissors",
+    "concept": "Mixing over more than two actions",
+    "story": "Rock beats scissors, scissors beat paper, paper beats rock.",
+    "task": "mixed",
+    "players": [
+      "Row",
+      "Column"
+    ],
+    "row_labels": [
+      "Rock",
+      "Paper",
+      "Scissors"
+    ],
+    "col_labels": [
+      "Rock",
+      "Paper",
+      "Scissors"
+    ],
+    "A": [
+      [
+        0.0,
+        -1.0,
+        1.0
+      ],
+      [
+        1.0,
+        0.0,
+        -1.0
+      ],
+      [
+        -1.0,
+        1.0,
+        0.0
+      ]
+    ],
+    "B": [
+      [
+        0.0,
+        1.0,
+        -1.0
+      ],
+      [
+        -1.0,
+        0.0,
+        1.0
+      ],
+      [
+        1.0,
+        -1.0,
+        0.0
+      ]
+    ],
+    "hints": [
+      "Is any action better than the others on average? What would the opponent do if one were?"
+    ],
+    "check": {
+      "type": "nash_conv",
+      "tolerance": 0.06,
+      "require_fully_mixed": false
+    },
+    "solution": {
+      "mixed": [
+        {
+          "x": [
+            0.333333,
+            0.333333,
+            0.333333
+          ],
+          "y": [
+            0.333333,
+            0.333333,
+            0.333333
+          ]
+        }
+      ]
+    },
+    "known_as": "Rock-Paper-Scissors",
+    "difficulty": {
+      "size": "3x3",
+      "n_equilibria": 1,
+      "max_support": 3,
+      "max_denominator": 3,
+      "dominance_solvable": false,
+      "learning_rounds": 5620
+    }
+  }
+]
