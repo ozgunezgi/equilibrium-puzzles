@@ -2,15 +2,15 @@
 
 A browser game about Nash equilibrium, and the notebooks that build everything underneath it.
 
-**[Play the game →](https://ozgunezgi.github.io/equilibrium-puzzles/)**
+**[Play the game →](https://ozgunezgi.github.io/equilibrium-puzzles/game.html)**
 
 A Nash equilibrium is an outcome in which no player can do better by changing only their own move. This repository approaches it from three sides: computing equilibria exactly, watching learning algorithms try to reach them by playing, and turning both into a game where people do the same.
 
 ## The game
 
-`index.html` is the whole game: one file, no build step, no server. It has two parts.
+`game.html` is the whole game: one file, no build step, no server. It has two parts.
 
-**Puzzles.** Small games from the literature, from the Prisoner's Dilemma and Matching Pennies to penalty kicks and the Battle of the Sexes. Each level has three modes:
+**Puzzles.** Small games from the literature, from the Prisoner's Dilemma and Matching Pennies to penalty kicks and Bach or Stravinsky. Each level has three modes:
 
 - *Solve:* select the cells nobody wants to leave, or set the mix of moves that makes the other player indifferent.
 - *Watch learners:* hand the same game to two copies of fictitious play, regret matching or Q-learning and see where they end up.
@@ -35,7 +35,7 @@ The main thread follows Shoham and Leyton-Brown, *Multiagent Systems* (2009). Ea
 ## Layout
 
 ```
-index.html        the game
+game.html         the game
 levels/           puzzle files written by notebook 03 (the game also carries a copy)
 notebooks/        01, 02, 03
 requirements.txt
@@ -50,7 +50,7 @@ pip install -r requirements.txt
 jupyter notebook notebooks/
 ```
 
-The game: open `index.html` in a browser, or serve the folder with `python -m http.server` so it reads the files in `levels/`.
+The game: open `game.html` in a browser, or serve the folder with `python -m http.server` so it reads the files in `levels/`.
 
 ## License
 
