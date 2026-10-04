@@ -782,6 +782,45 @@ html[data-theme="clean"], [data-theme="clean"] body { background: var(--bg); }
 /* everything a little smaller on larger screens, like viewing the page at about 85% */
 @media (min-width: 900px) { html[data-theme="clean"] { zoom: 0.85; } }
 
+/* home */
+[data-theme="clean"] .fun-home .hero { text-align: center; padding: 14px 10px 4px; max-width: 720px; margin: 0 auto; }
+[data-theme="clean"] .fun-home .kicker { color: var(--muted); font-size: 0.9rem; font-weight: 600; margin: 0 0 6px; }
+[data-theme="clean"] .fun-home .hero h2 { font-size: clamp(1.7rem, 3.6vw, 2.3rem); margin: 0 0 12px; }
+[data-theme="clean"] .fun-home .hero p { color: #44444C; margin: 0 auto; max-width: 60ch; }
+[data-theme="clean"] .fun-home .home-cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin: 26px 0 12px; }
+@media (max-width: 760px) { [data-theme="clean"] .fun-home .home-cards { grid-template-columns: 1fr; } }
+[data-theme="clean"] .fun-home .home-card { display: flex; flex-direction: column; gap: 8px; border-radius: 18px; background: var(--surface-3); padding: 16px; cursor: pointer; box-shadow: inset 0 0 0 1.5px transparent; transition: box-shadow .15s; }
+[data-theme="clean"] .fun-home .home-card:hover, [data-theme="clean"] .fun-home .home-card:focus-visible { box-shadow: inset 0 0 0 1.5px #1C1C21; outline: none; }
+[data-theme="clean"] .fun-home .home-card b { font-family: var(--display); font-size: 1.2rem; margin-top: 4px; }
+[data-theme="clean"] .fun-home .home-card .txt { color: #55555D; font-size: 0.92rem; line-height: 1.45; flex: 1; }
+[data-theme="clean"] .fun-home .home-btn { align-self: flex-start; margin-top: 8px; pointer-events: none; }
+[data-theme="clean"] .fun-home .home-card:hover .home-btn { filter: brightness(1.12); }
+[data-theme="clean"] .fun-home .home-note { text-align: center; color: var(--muted); font-size: 0.88rem; margin: 8px 0 0; }
+/* previews */
+[data-theme="clean"] .fun-home .pv { background: #fff; border-radius: 14px; height: 132px; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 12px; }
+[data-theme="clean"] .fun-home .pv-matrix { display: grid; grid-template-columns: 52px 52px; grid-template-rows: 52px 52px; gap: 6px; justify-content: center; align-content: center; }
+[data-theme="clean"] .fun-home .mc { position: relative; border: 1.5px solid #CFCFCB; border-radius: 10px; background: #fff linear-gradient(to top right, transparent calc(50% - .5px), #E1E1DD calc(50% - .5px), #E1E1DD calc(50% + .5px), transparent calc(50% + .5px)); }
+[data-theme="clean"] .fun-home .mc.eq { border-color: #1C1C21; }
+[data-theme="clean"] .fun-home .mc i { position: absolute; font-style: normal; font-weight: 700; font-size: 0.95rem; }
+[data-theme="clean"] .fun-home .mc .a { left: 6px; bottom: 3px; color: var(--row); }
+[data-theme="clean"] .fun-home .mc .b { right: 6px; top: 1px; color: var(--col); }
+[data-theme="clean"] .fun-home .mc em { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); font-style: normal; color: #F2B705; -webkit-text-stroke: 0.8px #1C1C21; font-size: 1.1rem; }
+[data-theme="clean"] .fun-home .hand-sm { width: 42px; height: 42px; display: block; }
+[data-theme="clean"] .fun-home .hand-sm img { width: 100%; height: 100%; object-fit: contain; display: block; }
+[data-theme="clean"] .fun-home .vs { font-weight: 700; color: var(--muted); font-size: 0.85rem; margin: 0 2px; }
+[data-theme="clean"] .fun-home .myst svg { width: 44px; height: 44px; display: block; }
+[data-theme="clean"] .fun-home .pv-bars { flex-direction: column; align-items: stretch; gap: 7px; }
+[data-theme="clean"] .fun-home .br { display: grid; grid-template-columns: 24px 1fr; gap: 8px; align-items: center; }
+[data-theme="clean"] .fun-home .br .fc svg { width: 24px; height: 24px; display: block; }
+[data-theme="clean"] .fun-home .br .t { height: 10px; border-radius: 5px; background: #F1F1EF; overflow: hidden; }
+[data-theme="clean"] .fun-home .br .f { display: block; height: 100%; border-radius: 5px; }
+[data-theme="clean"] .fun-home .pv-matrix { align-items: stretch; justify-items: stretch; }
+[data-theme="clean"] .fun-home .home-btn { align-self: center; }
+[data-theme="clean"] .fun-home .home-card b, [data-theme="clean"] .fun-home .home-card .txt { text-align: center; }
+/* title and menu centred */
+[data-theme="clean"] header.top, [data-theme="clean"] header { justify-content: center; text-align: center; }
+[data-theme="clean"] .worlds { justify-content: center; }
+
 </style>
 </head>
 <body>
@@ -1008,7 +1047,7 @@ html[data-theme="clean"], [data-theme="clean"] body { background: var(--bg); }
     if (!host) return;
     host.innerHTML = "";
     const v = el("div", { class: "fun fun-" + tab }); host.append(v);
-    ({ mystery: viewMystery, tournament: viewTournament, evolution: viewEvolution })[tab](v);
+    ({ home: viewHome, mystery: viewMystery, tournament: viewTournament, evolution: viewEvolution })[tab](v);
   }
   window.EQP_FUN = {
     render(key, container) { tab = key; host = container; render(); },
@@ -1145,21 +1184,53 @@ html[data-theme="clean"], [data-theme="clean"] body { background: var(--bg); }
     return b;
   }
 
+  // ---------- home ----------
+  function viewHome(v) {
+    const go = (k, lvl) => window.EQP_GO && window.EQP_GO(k, lvl);
+    v.append(el("div", { class: "hero" },
+      el("p", { class: "kicker" }, "A game about Nash equilibrium"),
+      el("h2", {}, "Find the move nobody wants to change"),
+      el("p", {}, "In a Nash equilibrium every player is already doing the best they can, given what the others do. Find those points yourself, then see whether learning algorithms find them just by playing. Pick a place to start:")));
+    // small previews that look like the real screens
+    const cell = (a, b, star) => el("span", { class: "mc" + (star ? " eq" : "") }, el("i", { class: "b" }, b), el("i", { class: "a" }, a), star ? el("em", {}, "★") : null);
+    const prevPuzzle = el("div", { class: "pv pv-matrix" }, cell(3, 3), cell(0, 5), cell(5, 0), cell(1, 1, true));
+    const prevMystery = el("div", { class: "pv pv-hands" },
+      el("span", { class: "hand-sm", html: handSVG(0) }), el("span", { class: "hand-sm", html: handSVG(1) }), el("span", { class: "hand-sm", html: handSVG(2) }),
+      el("span", { class: "vs" }, "vs"), el("span", { class: "myst", html: MYSTERY }));
+    const prevTour = el("div", { class: "pv pv-bars" }, ...[["pavlov", 0.82], ["regret", 0.66], ["copy", 0.52], ["habit", 0.22]].map(([k, w]) =>
+      el("span", { class: "br" }, el("span", { class: "fc", html: face(k) }), el("span", { class: "t" }, el("span", { class: "f", style: `width:${w * 100}%;background:${PASTEL[k][1]};opacity:.6` })))));
+    const card = (preview, title, text, cta, onclick) => {
+      const c = el("div", { class: "home-card", role: "link", tabindex: "0", onclick, onkeydown: e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); onclick(); } } },
+        preview, el("b", {}, title), el("span", { class: "txt" }, text), el("span", { class: "btn home-btn" }, cta));
+      return c;
+    };
+    v.append(el("div", { class: "home-cards" },
+      card(prevPuzzle, "Puzzles", "Find the equilibrium in classic games, from the Prisoner's Dilemma to penalty kicks. Each puzzle can also be handed to learning algorithms, or played against one.", "Start the puzzles", () => go("world1", 0)),
+      card(prevMystery, "Mystery opponents", "Eight opponents play Rock-Paper-Scissors by hidden rules. Beat each one in eight rounds, then name its rule.", "Meet the opponents", () => go("mystery")),
+      card(prevTour, "Tournament and evolution", "Let the opponents play each other, and watch strategies spread through a crowd until cooperation wins or collapses.", "Open the tournament", () => go("tournament"))));
+  }
+
   // ---------- tournament ----------
-  const T = { game: "rps", on: new Set(["habit", "coin", "copy", "stat", "rookie"]), seed: 1 };
+  const T = { game: "rps", on: new Set(CH.map(c => c.key)), seed: 1 };
+  const T_REPEATS = 20;
   function tournament() {
     const G = GAMES[T.game], keys = CH.map(c => c.key).filter(k => T.on.has(k)), pay = {}; keys.forEach(a => pay[a] = {});
     keys.forEach((a, ia) => keys.forEach((b, ib) => {
       if (ib <= ia) return;
-      const rng = rngFrom(T.seed * 1009 + ia * 31 + ib), A = makeBot(a, G, rng), B = makeBot(b, G, rng); let sa = 0, sb = 0;
-      for (let t = 0; t < 200; t++) { const i = A.move(), j = B.move(); A.observe(i, j); B.observe(j, i); sa += G.M[i][j]; sb += G.M[j][i]; }
-      pay[a][b] = sa / 200; pay[b][a] = sb / 200;
+      let sa = 0, sb = 0;
+      for (let r = 0; r < T_REPEATS; r++) {
+        const rng = rngFrom((T.seed * 1009 + ia * 31 + ib) * 97 + r), A = makeBot(a, G, rng), B = makeBot(b, G, rng);
+        for (let t = 0; t < 200; t++) { const i = A.move(), j = B.move(); A.observe(i, j); B.observe(j, i); sa += G.M[i][j]; sb += G.M[j][i]; }
+      }
+      pay[a][b] = sa / (200 * T_REPEATS); pay[b][a] = sb / (200 * T_REPEATS);
     }));
-    return { keys, pay, total: keys.map(a => [a, keys.filter(b => b !== a).reduce((s, b) => s + pay[a][b], 0) / (keys.length - 1)]).sort((x, y) => y[1] - x[1]) };
+    const order = k => CH.findIndex(c => c.key === k);
+    return { keys, pay, total: keys.map(a => [a, keys.filter(b => b !== a).reduce((s, b) => s + pay[a][b], 0) / (keys.length - 1)])
+      .sort((x, y) => (Math.round(y[1] * 100) - Math.round(x[1] * 100)) || order(x[0]) - order(y[0])) };
   }
   function viewTournament(v) {
     v.append(el("h2", {}, "Tournament"),
-      el("p", { class: "dim" }, "Every character plays every other one for 200 rounds, as in Robert Axelrod's famous 1980 tournament. The score is the average per round."));
+      el("p", { class: "dim" }, "Every character plays every other one for 200 rounds, as in Robert Axelrod's famous 1980 tournament. Each pairing is repeated 20 times with fresh random draws, and the score is the average per round."));
     const body = el("div", { class: "card" }); v.append(body);
     const draw = () => {
       const before = {}, widths = {};
@@ -1172,7 +1243,7 @@ html[data-theme="clean"], [data-theme="clean"] body { background: var(--bg); }
       const board = el("div", { class: "standings", role: "list" });
       const toggle = k => { if (T.on.has(k)) { if (T.on.size > 2) T.on.delete(k); } else T.on.add(k); draw(); };
       total.forEach(([k, val], r) => board.append(el("button", { class: "srow", "data-k": k, role: "listitem", "aria-pressed": "true", title: `Take the ${ch(k).name} out`, onclick: () => toggle(k) },
-        el("span", { class: "chk", "aria-hidden": "true" }, "✓"), el("span", { class: "rk" }, String(r + 1)), el("span", { class: "fc", html: face(k) }), el("span", { class: "nm" }, ch(k).name),
+        el("span", { class: "chk", "aria-hidden": "true" }, "✓"), el("span", { class: "rk" }, String(1 + total.filter(([, w]) => Math.round(w * 100) > Math.round(val * 100)).length)), el("span", { class: "fc", html: face(k) }), el("span", { class: "nm" }, ch(k).name),
         el("span", { class: "t" }, el("span", { class: "f", style: `width:${Math.max(2, (val - lo) / (hi - lo) * 100)}%;background:${PASTEL[k][1]};opacity:0.6` })),
         el("span", { class: "v" }, T.game === "rps" ? signed(val) : fmt(val)))));
       CH.filter(c => !T.on.has(c.key)).forEach(c => board.append(el("button", { class: "srow off", "data-k": c.key, role: "listitem", "aria-pressed": "false", title: `Bring the ${c.name} back`, onclick: () => toggle(c.key) },
@@ -1219,7 +1290,7 @@ html[data-theme="clean"], [data-theme="clean"] body { background: var(--bg); }
     const k1 = f(x), k2 = f(add(x, k1, dt / 2)), k3 = f(add(x, k2, dt / 2)), k4 = f(add(x, k3, dt));
     const y = x.map((xi, i) => Math.max(1e-9, xi + dt / 6 * (k1[i] + 2 * k2[i] + 2 * k3[i] + k4[i]))), s = y.reduce((a, b) => a + b, 0); return y.map(q => q / s);
   }
-  const EV = { mode: "pd", pdR: "1", pdCounts: [18, 3, 9], rpsCounts: [21, 6, 3], hdCounts: [3, 27], rpsStart: "rock", rule: "same", run: false, hdV: "mid", hdC: "high" };
+  const EV = { mode: "pd", pdR: "1", pdCounts: [10, 10, 10], rpsCounts: [9, 10, 11], hdCounts: [3, 27], rpsStart: "rock", rule: "same", run: false, hdV: "mid", hdC: "high" };
   function counts(shares, n) {                     // largest-remainder rounding of shares to n tiles
     const raw = shares.map(p => p * n), base = raw.map(Math.floor);
     let left = n - base.reduce((a, b) => a + b, 0);
@@ -1311,7 +1382,7 @@ html[data-theme="clean"], [data-theme="clean"] body { background: var(--bg); }
       cap.textContent = gen === 0 ? G.intro : G.caption({ x, gen, over, top: x.indexOf(Math.max(...x)) });
       stackChart(hcv, hist, G.colors, MAXG);
     };
-    const stop = finished => { clearInterval(timer); timer = null; EV.run = false; runB.textContent = finished ? "Play again" : "Play"; stepB.disabled = !!finished; };
+    const stop = finished => { clearInterval(timer); timer = null; EV.run = false; runB.textContent = finished ? "Start over" : "Play"; stepB.disabled = !!finished; };
     const step = () => {
       prev = counts(x, N);
       for (let k = 0; k < 4; k++) x = rk4(x, A, G.dt / 4);
@@ -1323,7 +1394,7 @@ html[data-theme="clean"], [data-theme="clean"] body { background: var(--bg); }
     };
     runB.addEventListener("click", () => {
       if (timer) return stop();
-      if (gen >= MAXG) { x = G.start(); gen = 0; stable = 0; fast = false; prev = counts(x, N); hist.splice(0, hist.length, x.slice()); stepB.disabled = false; draw(); }
+      if (gen >= MAXG) { render(); return; }  // back to the start, so the crowd can be changed before the next run
       EV.run = true; runB.textContent = "Pause"; timer = setInterval(step, 320);
     });
     stepB.addEventListener("click", () => { if (!timer) step(); });
@@ -1435,6 +1506,7 @@ html[data-theme="clean"], [data-theme="clean"] body { background: var(--bg); }
     { key: "world2", name: "World 2: Mixed strategies", short: "Mixed", file: "levels/world2.json" },
   ];
   const FUN = [
+    { key: "home", short: "Home", hidden: true },
     { key: "mystery", short: "Mystery opponents" },
     { key: "tournament", short: "Tournament" },
     { key: "evolution", short: "Evolution" },
@@ -1449,7 +1521,7 @@ html[data-theme="clean"], [data-theme="clean"] body { background: var(--bg); }
   function saveProgress() { try { localStorage.setItem(KEY, JSON.stringify(progress)); } catch (e) {} }
 
   // ---------- state ----------
-  let worldKey = "world1";
+  let worldKey = "home";
   let levelIdx = 0;
   let st = {};          // per-level interaction state
   let mode = "solve";   // solve | watch | play (the tab the player last chose)
@@ -1571,6 +1643,7 @@ html[data-theme="clean"], [data-theme="clean"] body { background: var(--bg); }
     }
     box.append(el("span", { class: "sep" }), el("span", { class: "lbl" }, "Play"));
     for (const f of FUN) {
+      if (f.hidden) continue;
       box.append(el("button", { "aria-pressed": String(f.key === worldKey), onclick: () => { worldKey = f.key; renderAll(); } }, f.short));
     }
   }
@@ -2211,6 +2284,8 @@ html[data-theme="clean"], [data-theme="clean"] body { background: var(--bg); }
     if (fun) { window.EQP_FUN.render(worldKey, $("#level")); return; }
     renderList(); renderLevel();
   }
+  window.EQP_GO = (k, lvl) => { worldKey = k; if (!isFun(k)) levelIdx = lvl ?? firstUnsolved(); renderAll(); window.scrollTo(0, 0); };
+  { const h = document.querySelector("header h1"); if (h) { h.style.cursor = "pointer"; h.title = "Home"; h.addEventListener("click", () => window.EQP_GO("home")); } }
   function setTheme(t) {
     document.documentElement.dataset.theme = t;
     document.querySelectorAll(".themes button[data-t]").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.t === t)));
